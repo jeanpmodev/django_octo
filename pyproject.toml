@@ -18,3 +18,8 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/django_octo"]
+
+[tool.rye]
+dev-dependencies = [
+    "pytest>=9.2.0",
+]
