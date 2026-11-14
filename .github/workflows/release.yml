@@ -1,0 +1,73 @@
+name: Ecosystem Sync & PyPI Release
+
+on:
+  repository_dispatch:
+    types: [octo-module-released]
+  workflow_dispatch:
+    inputs:
+      module:
+        description: "Updated module name"
+        required: false
+        default: "manual-sync"
+      version:
+        description: "Updated module version"
+        required: false
+        default: "latest"
+      summary:
+        description: "Release summary"
+        required: false
+        default: "Manual ecosystem orchestration sync"
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  orchestrate-release:
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Rye
+        uses: eifinger/setup-rye@v4
+
+      - name: Calculate Cumulative Version & Update Changelog
+        id: sync
+        env:
+          DISPATCH_MODULE: ${{ github.event.client_payload.module || github.event.inputs.module }}
+          DISPATCH_VERSION: ${{ github.event.client_payload.version || github.event.inputs.version }}
+          DISPATCH_SUMMARY: ${{ github.event.client_payload.summary || github.event.inputs.summary }}
+        run: |
+          OUTPUT=$(python3 scripts/sync_version.py)
+          echo "$OUTPUT"
+          echo "$OUTPUT" >> $GITHUB_OUTPUT
+
+      - name: Synchronize Dependencies & Run Integration Tests
+        run: |
+          rye sync
+          rye test
+
+      - name: Commit Version Bump & Tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@://github.com"
+          git add pyproject.toml src/django_octo/__init__.py CHANGELOG.md
+          git commit -m "chore(release): bump django-octo to v${{ steps.sync.outputs.NEW_VERSION }}"
+          git tag "v${{ steps.sync.outputs.NEW_VERSION }}"
+          git push origin main --tags
+
+      - name: Build Package
+        run: rye build
+
+      - name: Publish to PyPI (Trusted Publisher)
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+      - name: Create GitHub Release
+        uses: softprops/action-github-release@v2
+        with:
+          tag_name: "v${{ steps.sync.outputs.NEW_VERSION }}"
+          generate_release_notes: true

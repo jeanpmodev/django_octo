@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django-Octo | Core Control Hub</title>
+    <style>
+        :root {
+            --bg: #0b1110;
+            --surface: #121c1a;
+            --border: #1f332e;
+            --accent: #10b981;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; }
+        header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        h1 { margin: 0; font-size: 1.75rem; color: #fff; }
+        .badge {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .status-active { color: var(--accent); font-weight: 600; font-size: 0.85rem; }
+        .status-inactive { color: var(--muted); font-size: 0.85rem; }
+        .layer { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; }
+        p { color: var(--muted); font-size: 0.95rem; }
+        .actions { margin-top: 1.25rem; display: flex; gap: 0.75rem; }
+        .btn {
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: #182623;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: #06281e;
+            border-color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Django-Octo Control Hub</h1>
+                <small style="color: var(--muted);">Dual-Channel Modular Architecture Orchestrator</small>
+            </div>
+            <span class="badge">Core v{{ core_version }} • {{ active_count }}/{{ total_catalog }} Modules Active</span>
+        </header>
+
+        <section class="grid">
+            {% for mod in modules %}
+            <article class="card">
+                <div>
+                    <div class="layer">{{ mod.layer }}</div>
+                    <div class="card-header">
+                        <h2 style="margin: 0.25rem 0; font-size: 1.2rem;">{{ mod.title }}</h2>
+                        {% if mod.installed %}
+                            <span class="status-active">● v{{ mod.version }}</span>
+                        {% else %}
+                            <span class="status-inactive">○ Not Installed</span>
+                        {% endif %}
+                    </div>
+                    <p>{{ mod.description }}</p>
+                </div>
+                {% if mod.installed %}
+                <div class="actions">
+                    <a href="{{ mod.public_url }}" class="btn btn-primary">Public Channel</a>
+                    <a href="{{ mod.admin_url }}" class="btn">Admin Panel</a>
+                </div>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </section>
+    </div>
+</body>
+</html>
