@@ -1,6 +1,6 @@
 import importlib.util
 
-__version__ = "0.1.8"
+__version__ = "0.1.7"
 
 OCTO_MODULES = [
     "django_octo_seo",

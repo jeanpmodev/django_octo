@@ -1,6 +1,6 @@
 [project]
 name = "django-octo"
-version = "0.1.8"
+version = "0.1.7"
 description = "Enterprise Django-Octo Core Orchestrator unifying SEO, Security, and Dual-Channel runtime modules."
 readme = "README.md"
 requires-python = ">=3.12"
