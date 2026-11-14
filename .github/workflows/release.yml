@@ -67,7 +67,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
 
       - name: Create GitHub Release
-        uses: softprops/action-github-release@v2
-        with:
-          tag_name: "v${{ steps.sync.outputs.NEW_VERSION }}"
-          generate_release_notes: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "v${{ steps.sync.outputs.NEW_VERSION }}" --generate-notes
