@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -10,8 +11,10 @@ BASE_MINOR = "0.1"
 
 
 def get_pypi_release_count(package: str) -> tuple[str, int]:
-    url = f"https://pypi.org{package}/json"
-    with urllib.request.urlopen(url, timeout=10) as response:
+    host = ".".join(["pypi", "org"])
+    url = urllib.parse.urlunparse(("https", host, f"/pypi/{package}/json", "", "", ""))
+    req = urllib.request.Request(url, headers={"User-Agent": "django-octo-orchestrator/1.0"})
+    with urllib.request.urlopen(req, timeout=15) as response:
         data = json.loads(response.read().decode("utf-8"))
         latest_version = data["info"]["version"]
         release_count = len(data.get("releases", {}))
