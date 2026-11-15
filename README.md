@@ -1,5 +1,3 @@
-
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.11+-blue)](https://python.org)
 [![Framework: Django](https://img.shields.io/badge/Framework-Django-darkgreen)](https://djangoproject.com)
@@ -9,8 +7,8 @@
 [![Tests: pytest](https://img.shields.io/badge/Tests-pytest%20passed-2ea44f.svg)](https://github.com/jeanpmodev/django_octo/blob/main/TESTING.md)
 [![CI](https://img.shields.io/github/actions/workflow/status/jeanpmodev/django_octo_seo/ci.yml?branch=main&label=CI)](https://github.com/jeanpmodev/django_octo/actions/workflows/ci.yml)
 [![Code Style: PEP 8](https://img.shields.io/badge/code%20style-PEP%208-blue)](https://peps.python.org/pep-0008/)
-[![PyPI Provenance](https://img.shields.io/badge/PyPI-With%20Provenance-blue?logo=pypi&logoColor=white)](https://pypi.org/project/django-octo-seo/#provenance)
-[![Snyk Vulnerabilities](https://img.shields.io/badge/Snyk%20Vulnerabilities-0%20known-brightgreen?logo=snyk&logoColor=white)](https://security.snyk.io/package/pip/django-octo-seo)
+[![PyPI Provenance](https://img.shields.io/badge/PyPI-With%20Provenance-blue?logo=pypi&logoColor=white)](https://pypi.org/project/django-octo/#provenance)
+[![Snyk Vulnerabilities](https://img.shields.io/badge/Snyk%20Vulnerabilities-0%20known-brightgreen?logo=snyk&logoColor=white)](https://security.snyk.io/package/pip/django-octo)
 [![Core Security Audit](https://github.com/jeanpmodev/django_octo/actions/workflows/security.yml/badge.svg)](https://github.com/jeanpmodev/django_octo/actions/workflows/security.yml)
 
 **django_octo** is the modular core orchestrator for the **Django-Octo** framework ecosystem. It unifies decoupled runtime modules under a single installation entrypoint, providing automated environment discovery, live Dual-Channel observability, and event-driven cumulative versioning.
