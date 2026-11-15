@@ -8,6 +8,7 @@ from pathlib import Path
 
 SATELLITES = ["django-octo-seo", "django-octo-security"]
 BASE_MINOR = "0.1"
+PATCH_OFFSET = 2
 
 
 def get_pypi_release_count(package: str) -> tuple[str, int]:
@@ -30,7 +31,17 @@ def main() -> None:
         versions_map[pkg] = latest
         total_releases += count
 
-    new_version = f"{BASE_MINOR}.{total_releases}"
+    calculated_patch = total_releases + PATCH_OFFSET
+
+    try:
+        core_latest, _ = get_pypi_release_count("django-octo")
+        core_patch = int(core_latest.split(".")[-1])
+        if calculated_patch <= core_patch:
+            calculated_patch = core_patch + 1
+    except Exception:
+        pass
+
+    new_version = f"{BASE_MINOR}.{calculated_patch}"
 
     # Update pyproject.toml
     pyproject_path = Path("pyproject.toml")
