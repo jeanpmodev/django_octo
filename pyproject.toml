@@ -1,6 +1,6 @@
 [project]
 name = "django-octo"
-version = "0.1.11"
+version = "0.1.12"
 description = "Enterprise Django-Octo Core Orchestrator unifying SEO, Security, and Dual-Channel runtime modules."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -8,7 +8,7 @@ license = { text = "MIT" }
 authors = [{ name = "Jean Carlos", email = "jeanpmodev@gmail.com" }]
 dependencies = [
     "django>=6.1.2",
-    "django-octo-seo>=0.1.6",
+    "django-octo-seo>=0.1.7",
     "django-octo-security>=0.1.1",
 ]
 
