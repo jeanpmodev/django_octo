@@ -11,7 +11,7 @@ on:
 permissions: read-all
 
 jobs:
-    snyk-scan:
+  snyk-scan:
     name: Snyk Security Scan
     runs-on: ubuntu-latest
     permissions:
@@ -33,7 +33,6 @@ jobs:
         if: always()
         with:
           sarif_file: snyk.sarif
-
 
   ossf-scorecard:
     name: OpenSSF Scorecard
