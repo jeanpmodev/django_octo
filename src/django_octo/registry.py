@@ -1,8 +1,7 @@
 import importlib.metadata
 import importlib.util
 from typing import Any
-
-CORE_MODULE = "django_octo"
+from . import discover_octo_modules
 
 MODULE_CATALOG = [
     {
@@ -41,29 +40,16 @@ MODULE_CATALOG = [
         "public_url": None,
         "admin_url": "/admin/",
     },
+    {
+        "package": "django-octo-aurora",
+        "module": "django_octo_aurora",
+        "title": "Aurora Runtime & Observability Engine",
+        "layer": "Autonomous Ecosystem Telemetry & Inspection",
+        "description": "Real-time application introspection and unified system intelligence across installed Django apps.",
+        "public_url": None,
+        "admin_url": "/admin/",
+    },
 ]
-
-
-def discover_octo_modules() -> list[str]:
-    """Return all installed django_octo_* modules and third-party entry-point plugins."""
-    discovered: set[str] = {
-        item["module"]
-        for item in MODULE_CATALOG
-        if importlib.util.find_spec(item["module"]) is not None
-    }
-
-    for dist in importlib.metadata.distributions():
-        pkg_name = dist.metadata.get("Name", "")
-        normalized = pkg_name.lower().replace("-", "_")
-        if normalized.startswith("django_octo_") and normalized != CORE_MODULE:
-            if importlib.util.find_spec(normalized) is not None:
-                discovered.add(normalized)
-
-    for ep in importlib.metadata.entry_points(group="django_octo.plugins"):
-        if importlib.util.find_spec(ep.value) is not None:
-            discovered.add(ep.value)
-
-    return sorted(discovered)
 
 
 def discover_octo_ecosystem() -> dict[str, Any]:
@@ -71,7 +57,7 @@ def discover_octo_ecosystem() -> dict[str, Any]:
     try:
         core_version = importlib.metadata.version("django-octo")
     except importlib.metadata.PackageNotFoundError:
-        core_version = "0.2.0-dev"
+        core_version = "0.1.23-dev"
 
     catalog_by_module = {item["module"]: item for item in MODULE_CATALOG}
     all_detected_modules = sorted(

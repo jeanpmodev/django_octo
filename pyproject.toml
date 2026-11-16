@@ -1,7 +1,7 @@
 [project]
 name = "django-octo"
 version = "0.1.23"
-description = "Enterprise Django-Octo Core Orchestrator unifying SEO, Security, and Dual-Channel runtime modules."
+description = "Enterprise Django-Octo Core Orchestrator unifying SEO, Security, UML, QA, Aurora, and Dual-Channel runtime modules."
 readme = "README.md"
 requires-python = ">=3.12"
 license = { text = "MIT" }
@@ -10,16 +10,31 @@ dependencies = [
     "django>=6.1.2",
     "django-octo-seo>=0.1.7",
     "django-octo-security>=0.1.1",
+    "django-octo-uml>=0.1.0",
+    "django-octo-qa>=0.1.0",
+    "django-octo-aurora>=0.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0.0",
+    "pytest-django>=4.10.0",
 ]
 
 [build-system]
-requires = ["hatchling==1.26.3"]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pytest>=9.0.0",
+    "pytest-django>=4.10.0",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/django_octo"]
 
-[tool.rye]
-dev-dependencies = [
-    "pytest>=9.2.0",
-]
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"
+pythonpath = ["src", "."]

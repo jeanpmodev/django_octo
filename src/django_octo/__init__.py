@@ -2,13 +2,14 @@ import importlib.metadata
 import importlib.util
 from django.conf import settings
 
-__version__ = "0.1.13"
+__version__ = "0.1.23"
 
 OCTO_MODULES = [
     "django_octo_seo",
     "django_octo_security",
     "django_octo_uml",
     "django_octo_qa",
+    "django_octo_aurora",
 ]
 
 
@@ -52,4 +53,3 @@ def _auto_inject_installed_apps() -> None:
 
 
 _auto_inject_installed_apps()
-
