@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.17] - 2026-11-16
+- **Updated Module:** `django_octo_qa` (`vv0.1.1`)
+- **Summary:** Automated module release propagated to Django-Octo Core.
+
 ## [0.1.16] - 2026-11-16
 - **Updated Module:** `manual-sync` (`vlatest`)
 - **Summary:** Manual ecosystem orchestration sync
