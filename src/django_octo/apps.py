@@ -1,6 +1,6 @@
-from django.apps import AppConfig
+from django.apps import AppConfig, apps
 from django.conf import settings
-from .registry import discover_octo_modules
+from . import discover_octo_modules
 
 
 class DjangoOctoConfig(AppConfig):
@@ -23,4 +23,5 @@ class DjangoOctoConfig(AppConfig):
 
         if added:
             settings.INSTALLED_APPS = current_apps
-
+            if apps.loading:
+                apps.populate(settings.INSTALLED_APPS)

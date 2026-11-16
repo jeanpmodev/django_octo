@@ -27,8 +27,9 @@ def discover_octo_modules() -> list[str]:
                 discovered.add(normalized)
 
     for ep in importlib.metadata.entry_points(group="django_octo.plugins"):
-        if importlib.util.find_spec(ep.value) is not None:
-            discovered.add(ep.value)
+        mod_path = ep.value.split(":")[0]
+        if importlib.util.find_spec(mod_path) is not None:
+            discovered.add(mod_path)
 
     return sorted(discovered)
 
@@ -53,3 +54,5 @@ def _auto_inject_installed_apps() -> None:
 
 
 _auto_inject_installed_apps()
+
+__all__ = ["discover_octo_modules", "get_installed_octo_apps", "__version__"]
