@@ -2,7 +2,7 @@ import importlib.metadata
 import importlib.util
 from django.conf import settings
 
-__version__ = "0.1.26"
+__version__ = "0.1.27"
 
 OCTO_MODULES = [
     "django_octo_seo",
