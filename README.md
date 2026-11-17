@@ -16,13 +16,13 @@
 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.11+-blue)](https://python.org)
+[![Python](https://img.shields.io/badge/Python-3.12+-blue)](https://python.org)
 [![Framework: Django](https://img.shields.io/badge/Framework-Django-darkgreen)](https://djangoproject.com)
 [![Package Manager: Rye](https://img.shields.io/badge/Package_Manager-Rye-orange)](https://astral.sh)
 ![PyPI Version](https://img.shields.io/pypi/v/django-octo)
 [![Latest on Django Packages](https://img.shields.io/badge/Django_Packages-django__octo-8c3c26.svg)](https://djangopackages.org/packages/p/django_octo/)
 [![Tests: pytest](https://img.shields.io/badge/Tests-pytest%20passed-2ea44f.svg)](https://github.com/jeanpmodev/django_octo/blob/main/TESTING.md)
-[![CI](https://img.shields.io/github/actions/workflow/status/jeanpmodev/django_octo_seo/ci.yml?branch=main&label=CI)](https://github.com/jeanpmodev/django_octo/actions/workflows/ci.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/jeanpmodev/django_octo/ci.yml?branch=main&label=CI)](https://github.com/jeanpmodev/django_octo/actions/workflows/ci.yml)
 [![Code Style: PEP 8](https://img.shields.io/badge/code%20style-PEP%208-blue)](https://peps.python.org/pep-0008/)
 [![PyPI Provenance](https://img.shields.io/badge/PyPI-With%20Provenance-blue?logo=pypi&logoColor=white)](https://pypi.org/project/django-octo/#provenance)
 [![Snyk Vulnerabilities](https://img.shields.io/badge/Snyk%20Vulnerabilities-0%20known-brightgreen?logo=snyk&logoColor=white)](https://security.snyk.io/package/pip/django-octo)
@@ -49,30 +49,37 @@ Designed to remain completely agnostic to domain logic, this core hub dynamicall
 ```mermaid
 flowchart TB
     subgraph Satellites["🛰️ Decoupled Satellite Modules"]
-        SEO["django-octo-seo<br/>(Semantic & JSON-LD Engine)"]
-        SEC["django-octo-security<br/>(CVE & HTTP Posture Engine)"]
-        EXT["Future Octo Modules<br/>(Extensible Plugin Slot)"]
+        direction LR
+        subgraph Edge["🛡️ Web & Security Layer"]
+            SEO["<b>django-octo-seo</b>"]
+            SEC["<b>django-octo-security</b>"]
+        end
+        subgraph Ops["🔭 Introspection & QA Layer"]
+            AUR["<b>django_octo_aurora</b>"]
+            UML["<b>django_octo_uml</b>"]
+            QA["<b>django-octo-qa</b>"]
+        end
     end
 
     subgraph Core["🍁 django-octo Core Orchestrator"]
-        REG["Runtime Introspection<br/>(registry.py)"]
-        HUB["Control Hub UI<br/>(/octo/)"]
-        SYNC["Cumulative Version Engine<br/>(scripts/sync_version.py)"]
+        REG["<b>Runtime Introspection</b>"]
+        HUB["<b>Control Hub UI</b>"]
+        SYNC["<b>Cumulative Version Engine</b>"]
     end
 
-    SEO -.->|repository_dispatch| SYNC
-    SEC -.->|repository_dispatch| SYNC
-    EXT -.->|repository_dispatch| SYNC
+    subgraph Surfaces["⚡ Unified Dual-Channel Surfaces"]
+        PUB["🌐 <b>Public Routes</b>"]
+        ADM["🔐 <b>Unified Django Admin</b>"]
+    end
 
-    SEO --> REG
-    SEC --> REG
-    EXT --> REG
-
+    Edge -.-> SYNC
+    Ops -.-> SYNC
+    Edge --> REG
+    Ops --> REG
     REG --> HUB
-    HUB -->|Public Surface| PUB["🌐 Unified Public Routes"]
-    HUB -->|Control Surface| ADM["🔐 Unified Django Admin"]
+    HUB --> PUB
+    HUB --> ADM
 ```
-
 ---
 
 ##  Orchestrated Ecosystem 
@@ -81,7 +88,10 @@ flowchart TB
 | :--- | :--- | :--- | :--- |
 | **`django-octo`** | Core Orchestrator & Runtime Hub | `/octo/` | Unified `INSTALLED_APPS` & `urls.py` |
 | **[`django-octo-seo`](https://github.com/jeanpmodev/django_octo_seo)** | 8-Layer Semantic & JSON-LD Engine | `/seo-demo/` | `/admin/` (SEO Models) |
-| **[`django-octo-security`](https://github.com/jeanpmodev/django_octo_security))** | Zero-Dependency CVE & HTTP Posture | `/security-audit/` | `/admin/` (CVE Checker) |
+| **[`django-octo-security`](https://github.com/jeanpmodev/django_octo_security)** | Zero-Dependency CVE & HTTP Posture | `/security-audit/` | `/admin/` (CVE Checker) |
+| **[`django_octo_aurora`](https://github.com/jeanpmodev/django_octo_aurora)** | Runtime Software Topology Visualizer | `/aurora/` | `/admin/` (Aurora Snapshots) |
+| **[`django_octo_uml`](https://github.com/jeanpmodev/django_octo_uml)** | Runtime Entity-Relationship & UML Engine | — | `/admin/` (UML Architecture) |
+| **[`django-octo-qa`](https://github.com/jeanpmodev/django_octo_qa)** | Unified Pytest, Behave & Locust Runner | — | `/admin/` (Quality Assurance) |
 
 ---
 
