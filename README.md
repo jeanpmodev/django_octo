@@ -1,3 +1,11 @@
+## Django octo 
+
+## Django octo ecosystem downloads statistics
+
+<!-- START_STATS -->
+<!-- END_STATS -->
+
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.11+-blue)](https://python.org)
 [![Framework: Django](https://img.shields.io/badge/Framework-Django-darkgreen)](https://djangoproject.com)
