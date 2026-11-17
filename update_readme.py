@@ -22,7 +22,7 @@ total_downloads = 0
 for pkg in PACKAGES:
     pypi_name = pkg["pypi"]
     repo_name = pkg["repo"]
-    url = f"https://pepy.tech{pypi_name}"
+    url = f"https://pepy.tech/{pypi_name}"
 
     resp = requests.get(url, headers=headers, timeout=15)
     resp.raise_for_status()
