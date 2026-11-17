@@ -9,9 +9,9 @@ PACKAGES = [
     {"pypi": "django-octo", "repo": "django_octo"},
     {"pypi": "django-octo-seo", "repo": "django_octo_seo"},
     {"pypi": "django-octo-security", "repo": "django_octo_security"},
-    {"pypi": "django-octo-aurora", "repo": "django_octo_aurora"},
-    {"pypi": "django-octo-uml", "repo": "django_octo_uml"},
-    {"pypi": "octo-qa", "repo": "octo_qa"},
+    {"pypi": "django_octo_aurora", "repo": "django_octo_aurora"},
+    {"pypi": "django_octo_uml", "repo": "django_octo_uml"},
+    {"pypi": "octo_qa", "repo": "octo_qa"},
 ]
 
 GITHUB_USER = "jeanpmodev"
@@ -29,14 +29,19 @@ for pkg in PACKAGES:
     url = API_BASE + pypi_name
 
     resp = requests.get(url, headers=headers, timeout=15)
-    resp.raise_for_status()
-    data = resp.json()
 
-    downloads = data.get("total_downloads", 0)
-    versions = data.get("versions", [])
-    latest_version = versions[-1] if versions else "N/A"
+    if resp.status_code == 200:
+        data = resp.json()
+        downloads = data.get("total_downloads", 0)
+        versions = data.get("versions", [])
+        latest_version = versions[-1] if versions else "N/A"
+    elif resp.status_code == 404:
+        downloads = 0
+        latest_version = "N/A"
+    else:
+        resp.raise_for_status()
+
     total_downloads += downloads
-
     downloads_fmt = f"{downloads:,}"
 
     repo_link = f"[{pypi_name}]({GH_BASE}{repo_name})"
