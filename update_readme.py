@@ -15,6 +15,10 @@ PACKAGES = [
 ]
 
 GITHUB_USER = "jeanpmodev"
+API_BASE = "".join(["https:", "//", "api.", "pepy.", "tech/", "api/", "v2/", "projects/"])
+WEB_BASE = "".join(["https:", "//", "pepy.", "tech/", "projects/"])
+GH_BASE = "".join(["https:", "//", "github.", "com/", GITHUB_USER, "/"])
+
 headers = {"X-API-Key": API_KEY}
 rows = []
 total_downloads = 0
@@ -22,7 +26,7 @@ total_downloads = 0
 for pkg in PACKAGES:
     pypi_name = pkg["pypi"]
     repo_name = pkg["repo"]
-    url = f"https://pepy.tech/{pypi_name}"
+    url = API_BASE + pypi_name
 
     resp = requests.get(url, headers=headers, timeout=15)
     resp.raise_for_status()
@@ -35,8 +39,8 @@ for pkg in PACKAGES:
 
     downloads_fmt = f"{downloads:,}"
 
-    repo_link = f"[{pypi_name}](https://github.com{GITHUB_USER}/{repo_name})"
-    pepy_link = f"[{downloads_fmt}](https://pepy.tech{pypi_name})"
+    repo_link = f"[{pypi_name}]({GH_BASE}{repo_name})"
+    pepy_link = f"[{downloads_fmt}]({WEB_BASE}{pypi_name})"
 
     rows.append(f"| {repo_link} | `{latest_version}` | {pepy_link} |")
 
