@@ -1,0 +1,18 @@
+site_name: Django-Octo Ecosystem
+site_url: https://jeanpmodev.github.io/django_octo/
+repo_url: https://github.com/jeanpmodev/django_octo
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: indigo
+    accent: cyan
+
+nav:
+  - Overview (Core): index.md
+  - Aurora (Topology): aurora.md
+  - SEO: seo.md
+  - Security: security.md
+  - UML: uml.md
+  - QA: qa.md
