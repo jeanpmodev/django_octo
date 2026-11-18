@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.28] - 2026-11-18
+- **Updated Module:** `django_octo_seo` (`vv0.1.8`)
+- **Summary:** Automated module release propagated to Django-Octo Core.
+
 ## [0.1.27] - 2026-11-17
 - **Updated Module:** `django_octo_qa` (`vv0.2.0`)
 - **Summary:** Automated module release propagated to Django-Octo Core.
