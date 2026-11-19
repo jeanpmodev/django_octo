@@ -18,22 +18,25 @@ build:
       - |
         python - << 'EOF'
         import pathlib
+        import re
 
         repos = {
-            "index.md": "django_octo",
-            "aurora.md": "django_octo_aurora",
-            "seo.md": "django_octo_seo",
-            "security.md": "django_octo_security",
-            "uml.md": "django_octo_uml",
-            "qa.md": "django_octo_qa",
+            "index.md": ("django_octo", "Django-Octo Core Orchestrator"),
+            "aurora.md": ("django_octo_aurora", "Django-Octo Aurora"),
+            "seo.md": ("django_octo_seo", "Django-Octo SEO"),
+            "security.md": ("django_octo_security", "Django-Octo Security"),
+            "uml.md": ("django_octo_uml", "Django-Octo UML"),
+            "qa.md": ("django_octo_qa", "Django-Octo QA"),
         }
 
-        for fname, repo in repos.items():
+        for fname, (repo, clean_title) in repos.items():
             p = pathlib.Path("docs") / fname
             text = p.read_text(encoding="utf-8")
             base = f"https://github.com/jeanpmodev/{repo}/blob/main"
             text = text.replace("(TESTING.md)", f"({base}/TESTING.md)")
             text = text.replace("(LICENSE)", f"({base}/LICENSE)")
+            text = re.sub(r"^#{1,2}\s+.*pypi library package.*$", f"# {clean_title}", text, count=1, flags=re.IGNORECASE | re.MULTILINE)
+            text = re.sub(r"^##\s+(flowchart\s+TB.*)$", r"```mermaid\n\1\n```", text, flags=re.MULTILINE)
             p.write_text(text, encoding="utf-8")
         EOF
 
