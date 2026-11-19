@@ -35,13 +35,8 @@ build:
             base = f"https://github.com/jeanpmodev/{repo}/blob/main"
             text = text.replace("(TESTING.md)", f"({base}/TESTING.md)")
             text = text.replace("(LICENSE)", f"({base}/LICENSE)")
+            text = text.replace("```---", "```\n\n---")
             text = re.sub(r"^#{1,2}\s+.*pypi library package.*$", f"# {clean_title}", text, count=1, flags=re.IGNORECASE | re.MULTILINE)
-            text = re.sub(
-                r"```mermaid\s*\n(.*?)```",
-                lambda m: '<pre class="mermaid"><code>' + m.group(1).strip() + '</code></pre>',
-                text,
-                flags=re.DOTALL,
-            )
             p.write_text(text, encoding="utf-8")
         EOF
 
