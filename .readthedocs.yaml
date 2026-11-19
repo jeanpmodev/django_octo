@@ -5,6 +5,8 @@ build:
   tools:
     python: "3.12"
   jobs:
+    install:
+      - pip install mkdocs mkdocs-material
     pre_build:
       - mkdir -p docs
       - cp README.md docs/index.md
@@ -14,26 +16,26 @@ build:
       - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_uml/main/README.md -o docs/uml.md
       - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_qa/main/README.md -o docs/qa.md
       - |
-        python -c "
+        python - << 'EOF'
         import pathlib
+
         repos = {
-            'index.md': 'django_octo',
-            'aurora.md': 'django_octo_aurora',
-            'seo.md': 'django_octo_seo',
-            'security.md': 'django_octo_security',
-            'uml.md': 'django_octo_uml',
-            'qa.md': 'django_octo_qa',
+            "index.md": "django_octo",
+            "aurora.md": "django_octo_aurora",
+            "seo.md": "django_octo_seo",
+            "security.md": "django_octo_security",
+            "uml.md": "django_octo_uml",
+            "qa.md": "django_octo_qa",
         }
+
         for fname, repo in repos.items():
-            p = pathlib.Path('docs') / fname
-            text = p.read_text(encoding='utf-8')
-            base = f'https://github.com/jeanpmodev/{repo}/blob/main'
-            text = text.replace('(TESTING.md)', f'({base}/TESTING.md)')
-            text = text.replace('(LICENSE)', f'({base}/LICENSE)')
-            p.write_text(text, encoding='utf-8')
-        "
-    install:
-      - pip install mkdocs-material
+            p = pathlib.Path("docs") / fname
+            text = p.read_text(encoding="utf-8")
+            base = f"https://github.com/jeanpmodev/{repo}/blob/main"
+            text = text.replace("(TESTING.md)", f"({base}/TESTING.md)")
+            text = text.replace("(LICENSE)", f"({base}/LICENSE)")
+            p.write_text(text, encoding="utf-8")
+        EOF
 
 mkdocs:
   configuration: mkdocs.yml
