@@ -14,7 +14,7 @@ REPOS = {
 docs_dir = pathlib.Path("docs")
 docs_dir.mkdir(exist_ok=True)
 
-for fname, (repo, clean_title) in REPOS.items():
+for fname, (repo, explicit_title) in REPOS.items():
     if repo == "django_octo":
         text = pathlib.Path("README.md").read_text(encoding="utf-8")
     else:
@@ -25,16 +25,20 @@ for fname, (repo, clean_title) in REPOS.items():
     base = f"https://github.com/jeanpmodev/{repo}/blob/main"
     text = text.replace("(TESTING.md)", f"({base}/TESTING.md)")
     text = text.replace("(LICENSE)", f"({base}/LICENSE)")
+
     text = re.sub(
         r"^#{1,2}\s+.*pypi library package.*$",
-        f"# {clean_title}",
+        "",
         text,
         count=1,
         flags=re.IGNORECASE | re.MULTILINE,
     )
+
     text = re.sub(
-        r"(?ms)```mermaid\s*(.*?)\s*```",
-        lambda m: f'\n\n<div class="mermaid">\n{m.group(1).strip()}\n</div>\n\n',
+        r"(?ms)```mermaid\s*(.*?)\s*```\s*(?:---)?",
+        lambda m: f'\n\n<pre class="mermaid"><code>{m.group(1).strip()}</code></pre>\n\n',
         text,
     )
-    (docs_dir / fname).write_text(text, encoding="utf-8")
+
+    front_matter = f"---\ntitle: {explicit_title}\n---\n\n"
+    (docs_dir / fname).write_text(front_matter + text.lstrip(), encoding="utf-8")
