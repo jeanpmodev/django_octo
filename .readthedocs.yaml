@@ -7,12 +7,31 @@ build:
   jobs:
     pre_build:
       - mkdir -p docs
-      - sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django_octo/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django_octo/blob/main/LICENSE)|g' README.md > docs/index.md
-      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_aurora/main/README.md | sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django_octo_aurora/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django_octo_aurora/blob/main/LICENSE)|g' > docs/aurora.md
-      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_seo/main/README.md | sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django_octo_seo/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django_octo_seo/blob/main/LICENSE)|g' > docs/seo.md
-      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_security/main/README.md | sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django_octo_security/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django_octo_security/blob/main/LICENSE)|g' > docs/security.md
-      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_uml/main/README.md | sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django_octo_uml/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django_octo_uml/blob/main/LICENSE)|g' > docs/uml.md
-      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_qa/main/README.md | sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django_octo_qa/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django_octo_qa/blob/main/LICENSE)|g' > docs/qa.md
+      - cp README.md docs/index.md
+      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_aurora/main/README.md -o docs/aurora.md
+      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_seo/main/README.md -o docs/seo.md
+      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_security/main/README.md -o docs/security.md
+      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_uml/main/README.md -o docs/uml.md
+      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_qa/main/README.md -o docs/qa.md
+      - |
+        python -c "
+        import pathlib
+        repos = {
+            'index.md': 'django_octo',
+            'aurora.md': 'django_octo_aurora',
+            'seo.md': 'django_octo_seo',
+            'security.md': 'django_octo_security',
+            'uml.md': 'django_octo_uml',
+            'qa.md': 'django_octo_qa',
+        }
+        for fname, repo in repos.items():
+            p = pathlib.Path('docs') / fname
+            text = p.read_text(encoding='utf-8')
+            base = f'https://github.com/jeanpmodev/{repo}/blob/main'
+            text = text.replace('(TESTING.md)', f'({base}/TESTING.md)')
+            text = text.replace('(LICENSE)', f'({base}/LICENSE)')
+            p.write_text(text, encoding='utf-8')
+        "
     install:
       - pip install mkdocs-material
 
