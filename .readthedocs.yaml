@@ -8,7 +8,7 @@ build:
     install:
       - pip install mkdocs mkdocs-material
     pre_build:
-      - python scripts/build_docs.py
+      - python build_docs.py
 
 mkdocs:
   configuration: mkdocs.yml
