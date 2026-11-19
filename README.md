@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/jeanpmodev/jeanpmodev/main/assets/django-octo.jpg" alt="Django-Octo-SEO" width="100%" />
 </p>
 
-## Django octo pypi library package
+## Django octo 
 
 ## Django octo ecosystem downloads statistics
 
