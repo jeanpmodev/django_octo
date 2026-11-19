@@ -37,9 +37,10 @@ build:
             text = text.replace("(LICENSE)", f"({base}/LICENSE)")
             text = re.sub(r"^#{1,2}\s+.*pypi library package.*$", f"# {clean_title}", text, count=1, flags=re.IGNORECASE | re.MULTILINE)
             text = re.sub(
-                r"(?ms)^#{1,3}\s*(flowchart\s+TB.*?)(?=\n#{1,3}\s|\Z)",
-                lambda m: "```mermaid\n" + m.group(1).strip() + "\n```\n",
+                r"```mermaid\s*\n(.*?)```",
+                lambda m: '<pre class="mermaid"><code>' + m.group(1).strip() + '</code></pre>',
                 text,
+                flags=re.DOTALL,
             )
             p.write_text(text, encoding="utf-8")
         EOF
