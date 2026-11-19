@@ -1,5 +1,5 @@
 site_name: Django-Octo Ecosystem
-site_url: https://jeanpmodev.github.io/django_octo/
+site_url: https://django-octo.readthedocs.io/en/latest/
 repo_url: https://github.com/jeanpmodev/django_octo
 
 theme:
@@ -8,6 +8,13 @@ theme:
     scheme: slate
     primary: indigo
     accent: cyan
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 nav:
   - Overview (Core): index.md
