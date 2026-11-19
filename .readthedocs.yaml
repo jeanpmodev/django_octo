@@ -9,10 +9,10 @@ build:
       - mkdir -p docs
       - sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django_octo/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django_octo/blob/main/LICENSE)|g' README.md > docs/index.md
       - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_aurora/main/README.md | sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django_octo_aurora/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django_octo_aurora/blob/main/LICENSE)|g' > docs/aurora.md
-      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django-octo-seo/main/README.md | sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django-octo-seo/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django-octo-seo/blob/main/LICENSE)|g' > docs/seo.md
-      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django-octo-security/main/README.md | sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django-octo-security/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django-octo-security/blob/main/LICENSE)|g' > docs/security.md
+      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_seo/main/README.md | sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django_octo_seo/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django_octo_seo/blob/main/LICENSE)|g' > docs/seo.md
+      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_security/main/README.md | sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django_octo_security/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django_octo_security/blob/main/LICENSE)|g' > docs/security.md
       - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_uml/main/README.md | sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django_octo_uml/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django_octo_uml/blob/main/LICENSE)|g' > docs/uml.md
-      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django-octo-qa/main/README.md | sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django-octo-qa/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django-octo-qa/blob/main/LICENSE)|g' > docs/qa.md
+      - curl -fsSL https://raw.githubusercontent.com/jeanpmodev/django_octo_qa/main/README.md | sed 's|(TESTING.md)|(https://github.com/jeanpmodev/django_octo_qa/blob/main/TESTING.md)|g; s|(LICENSE)|(https://github.com/jeanpmodev/django_octo_qa/blob/main/LICENSE)|g' > docs/qa.md
     install:
       - pip install mkdocs-material
 
