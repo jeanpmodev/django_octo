@@ -15,6 +15,13 @@ dependencies = [
     "django-octo-aurora>=0.1.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/jeanpmodev/django_octo"
+Documentation = "https://django-octo.readthedocs.io/en/latest/"
+Repository = "https://github.com/jeanpmodev/django_octo"
+Issues = "https://github.com/jeanpmodev/django_octo/issues"
+Changelog = "https://github.com/jeanpmodev/django_octo/blob/main/CHANGELOG.md"
+
 [project.optional-dependencies]
 dev = [
     "pytest>=9.0.0",
