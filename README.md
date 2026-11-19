@@ -32,6 +32,7 @@
 [![Core Security Audit](https://github.com/jeanpmodev/django_octo/actions/workflows/security.yml/badge.svg)](https://github.com/jeanpmodev/django_octo/actions/workflows/security.yml)
 [![Socket Badge](https://badge.socket.dev/pypi/package/django-octo/0.1.10?artifact_id=tar-gz)](https://badge.socket.dev/pypi/package/django-octo/0.1.10?artifact_id=tar-gz)
 [![Documentation Status](https://readthedocs.org/projects/django-octo/badge/?version=latest)](https://django-octo.readthedocs.io/en/latest/?badge=latest)
+[![PyPkgScore](https://pypkgscore.onrender.com/badge/django_octo.svg)](https://pypkgscore.onrender.com/pt-br/p/django_octo/)
 
 **django_octo** is the modular core orchestrator for the **Django-Octo** framework ecosystem. It unifies decoupled runtime modules under a single installation entrypoint, providing automated environment discovery, live Dual-Channel observability, and event-driven cumulative versioning.
 
