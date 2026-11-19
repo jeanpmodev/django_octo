@@ -36,9 +36,11 @@ build:
             text = text.replace("(TESTING.md)", f"({base}/TESTING.md)")
             text = text.replace("(LICENSE)", f"({base}/LICENSE)")
             text = re.sub(r"^#{1,2}\s+.*pypi library package.*$", f"# {clean_title}", text, count=1, flags=re.IGNORECASE | re.MULTILINE)
-            text = re.sub(r"([^\n])\n```mermaid", r"\1\n\n```mermaid", text)
-            text = re.sub(r"```\s*---", "```\n\n---", text)
-            text = re.sub(r"```\n([^\n])", r"```\n\n\1", text)
+            text = re.sub(
+                r"(?ms)```mermaid\s*(.*?)\s*```",
+                lambda m: f'\n\n<pre class="mermaid"><code>{m.group(1).strip()}</code></pre>\n\n',
+                text,
+            )
             p.write_text(text, encoding="utf-8")
         EOF
 
