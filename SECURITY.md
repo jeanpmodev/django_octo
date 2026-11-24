@@ -8,7 +8,7 @@ Central security governance and live audit telemetry for the **Django-Octo** cor
 
 | Module | OpenSSF Scorecard | Snyk Audit (CI) | PyPI Provenance | Last Check (UTC) |
 | :--- | :---: | :---: | :---: | :---: |
-| **django-octo (Core)** | `Pending` | `Not Configured` | Verified (OIDC) | 2026-11-23 |
+| **django-octo (Core)** | `Pending` | `Not Configured` | Verified (OIDC) | 2026-11-24 |
 
 <!-- OCTO-SEC-END -->
 
